@@ -1,0 +1,53 @@
+sing System;
+
+public class Program
+{
+    public static void Main()
+    {
+        // Cria uma instância da classe Random para gerar letras aleatorias
+        Random random = new Random();
+        
+        // Escolhe uma letra aleatória entre 'a' e 'z'
+        char letraEscolhida = (char)random.Next('a', 'z' + 1); 
+        char palpite; // Variável para armazenar o palpite do usuário
+        int tentativa = 0; // Contador de tentativas
+        bool acertou = false; // Verifica se o usuário acertou
+
+        Console.WriteLine("Bem-vindo ao jogo de adivinhação!");
+        Console.WriteLine("Escolha uma letra de 'a' até 'z'.");
+
+        // Loop que continua até que o usuário acerte a letra escolhida
+        while (!acertou)
+        {
+            string texto = Console.ReadLine(); // Lê a entrada do usuário
+            
+            // Verifica se a entrada é uma única letra
+            if (texto.Length == 1 && char.IsLetter(texto[0]))
+            {
+                palpite = texto[0]; // Armazena o palpite
+                tentativa++; // Incrementa o contador de tentativas
+
+                // Compara o palpite com a letra escolhida
+                if (palpite < letraEscolhida)
+                {
+                    Console.WriteLine("Muito baixo! Tente novamente."); // Palpite muito baixo
+                }
+                else if (palpite > letraEscolhida)
+                {
+                    Console.WriteLine("Muito alto! Tente novamente."); // Palpite muito alto
+                }
+                else
+                {
+                    // O usuário acertou a letra escolhida
+                    Console.WriteLine($"Parabéns! Você adivinhou a letra escolhida '{letraEscolhida}'! Errou {tentativa - 1} vezes.");
+                    acertou = true; // Atualiza para sair do loop
+                }
+            }
+            else
+            {
+                // Mensagem de erro para entradas inválidas
+                Console.WriteLine("Valor inválido. Tente novamente.");
+            }
+        }
+    }
+}
